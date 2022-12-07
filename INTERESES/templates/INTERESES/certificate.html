@@ -1,0 +1,186 @@
+
+
+{% load IC_extras %}
+{% load static %}
+
+<html>
+<head>
+<meta charset="utf-8">
+<title>Certificado</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'INTERESES/certificate.css' %}">
+    <style>
+        :root {
+            --main-orange: #ffc107;
+        }
+
+
+        /* Extra small devices (phones, 600px and down) */
+        @media only screen and (max-width: 1000px) {
+            :root {
+              font-size: 8px;
+            }
+        }
+
+
+        .center-me-hor{
+            margin: 0 auto;
+        }
+
+        #certificate-container{
+
+        }
+
+        body {
+            margin: 0px;
+            font-family: Helvetica neue;
+            background-color: gray;
+            width: 100%;
+            background-color: #d1d7dc;
+            font-family: 'Fira Sans', sans-serif;
+        }
+
+        #certificate-container{
+            width: 85vw;
+        }
+
+        #certificate{
+            width: 85vw;
+            height: 110vw;
+        }
+
+        #certificate-head{
+            height: 10%;
+            background-color: var(--main-orange);
+            text-align: center;
+        }
+
+        #certificate-body{
+            height: 80%;
+            padding: 2rem;
+        }
+
+        #certificate-footer{
+            height: 10%;
+            background-color: var(--main-orange);
+        }
+
+        #graph{
+            height: 40%;
+            width: 40%;
+        }
+
+        #attrChart{
+            max-height: 100%;
+        }
+
+        #attributes {
+            height: 60%;
+        }
+
+        #attributes .card{
+            height: 100% !important;
+        }
+
+
+        .card-foot{
+            background-color: var(--main-orange);
+            height: 40%;
+            width: 100%;
+            padding: 1rem;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div id="certificate-container" class="center-me-hor">
+        <div id="certificate"  class="jumbotron shadow p-3 mb-5 bg-white rounded" style="margin-top:2rem">
+            <div id="certificate-head">
+                AQUÍ VA LA INFO DEL USUARIO
+            </div>
+            <div id="certificate-body">
+                <div id="graph" class="center-me-hor">
+                    <canvas id="attrChart" width="400" height="400"></canvas>
+                </div>
+
+
+                <div id="attributes" class="row justify-content-md-center">
+                    {% for variant in variants %}
+                        <div class="col-5">
+                            <div class="card">
+                                <div class="card-body text-justify">
+                                    <div style="height: 60%">
+                                    <h5 class="card-title">{{ variant.attribute_set.first }} {{ variant.variant }}</h5>
+
+                                    <hr class="my-4">
+                                    <p class="card-text">
+                                        {{ variant.attribute_set.first.description }}
+                                    </p>
+                                    <p class="font-italic">
+                                        {{ variant.question }}
+                                    </p>
+                                    </div>
+                                    <div class="card-foot">
+                                        {{ variant.conclusion }}
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div id="certificate-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+
+
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script src="{% static 'INTERESES/certificate_script.js.js' %}"></script>
+
+
+<script>
+var ctx = document.getElementById('attrChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'horizontalBar',
+    data: {
+        labels: [
+            {% for percentage in attributes %}
+                "{{ percentage.attribute.attribute }}",
+            {% endfor %}
+        ],
+        datasets: [{
+            data: [
+                {% for percentage in attributes %}
+                    {{ percentage }},
+                {% endfor %}
+            ],
+            backgroundColor: 'rgba(200,100,30,0.5)',
+        }]
+    },
+    options: {
+
+        legend: {
+            display: false,
+            fontColor: 'black',
+        },
+    }
+});
+</script>

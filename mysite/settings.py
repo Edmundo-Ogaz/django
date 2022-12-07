@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'IC.apps.IcConfig',
     'DISC.apps.DiscConfig',
+    'INTERESES.apps.InteresesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

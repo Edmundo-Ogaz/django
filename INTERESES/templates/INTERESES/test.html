@@ -1,0 +1,61 @@
+<html lang="es">
+
+<head>
+	<meta charset="utf-8">
+	<title>TEST</title>
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'INTERESES/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+
+<body>
+<div id="pre-load"></div>
+<div id="test" class="container-fluid">
+    <form id="intereses_form" action="{% url 'INTERESES:save' test.id %}" method="post">
+        {% csrf_token %}
+        {% for question in questions %}
+            <div id="{{ question.id }}" class="question" style="z-index: -{{ question.id }}">
+            <div class="counter-left">{{ forloop.counter }} / {{ questions.count }}</div>
+            <div class="card-wrapper row">
+            {% for option in question.option_set.all %}
+                <div class="card-body form__answer">
+                    <input type="radio" name="question[{{ question.id }}]" id="option{{ option.id }}" value="{{ option.attribute.id }}">
+                    <label for="option{{ option.id }}">
+                        <div class="card-description">
+                            <p class="lead">
+                            {{ option }}
+                            </p>
+                        </div>
+                    </label>
+                </div>
+            {% endfor %}
+
+
+            </div>
+            </div>
+        {% endfor %}
+
+        <div id="finish" class="question" style="z-index: {{ question.id }}">
+        <div class="card-wrapper row">
+            <input type="submit" id="submit" name="submit" value="Finalizar" class="btn btn-warning btn-lg w-100"  form="intereses_form" />
+        </div>
+        </div>
+
+
+
+    </form>
+
+</div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="{% static 'INTERESES/script.js' %}"></script>
+
+<script>
+    const question_total = {{ questions.count }}
+
+
+</script>
