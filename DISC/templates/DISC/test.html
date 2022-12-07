@@ -1,0 +1,121 @@
+{% load IC_extras %}
+<html lang="es">
+
+<head>
+	<meta charset="utf-8">
+	<title>TEST</title>
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'DISC/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+	<!--<link rel="stylesheet" type="text/css" href="<?= base_url() ?>styles/css/style.css">-->
+
+</head>
+
+
+
+<body>
+
+<div class="center">
+    <form id="disc_form" action="{% url 'DISC:save' test.id %}" method="post">
+    {% csrf_token %}
+        {% for card in cards %}
+
+        <div class="disc-card" id="{{ forloop.counter0 }}" style="display:none; z-index: {{ forloop.counter }}">
+            <div class="disc-card-header">
+                {{ forloop.counter }}/{{ cards.count }}
+            </div>
+            <div class="disc-card-body">
+                <table class="disc-card-table">
+                    <tr>
+                        <th class=""></th>
+                        <th class="lead">+</th>
+                        <th class="lead">-</th>
+                    </tr>
+
+
+                    <tr class="fila">
+                        <td class="item lead">{{ card.dominante }}</td>
+                        <td>
+                            <label class="disc-container">
+                                <input class="checkmas" type="radio" name="mas[{{ forloop.counter0 }}]" value="D" required>
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
+                        <td>
+                            <label class="disc-container">
+                                <input class="checkmenos" type="radio" name="menos[{{ forloop.counter0 }}]" value="D" required>
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr class="fila">
+                        <td class="item lead">{{ card.influyente }}</td>
+                        <td>
+                            <label class="disc-container">
+                                <input class="checkmas" type="radio" name="mas[{{ forloop.counter0 }}]" value="I" required>
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
+                        <td>
+                            <label class="disc-container">
+                                <input class="checkmenos" type="radio" name="menos[{{ forloop.counter0 }}]" value="I" required>
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr class="fila">
+                        <td class="item lead">{{ card.estable }}</td>
+                        <td>
+                            <label class="disc-container">
+                                <input class="checkmas" type="radio" name="mas[{{ forloop.counter0 }}]" value="E" required>
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
+                        <td>
+                            <label class="disc-container">
+                                <input class="checkmenos" type="radio" name="menos[{{ forloop.counter0 }}]" value="E" required>
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr class="fila">
+                        <td class="item lead">{{ card.conciensudo }}</td>
+                        <td>
+                            <label class="disc-container">
+                                <input class="checkmas" type="radio" name="mas[{{ forloop.counter0 }}]" value="C" required>
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
+                        <td>
+                            <label class="disc-container">
+                                <input class="checkmenos" type="radio" name="menos[{{ forloop.counter0 }}]" value="C" required>
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="disc-card-footer">
+                <button type="button" class="btn btn-warning next-btn"> Siguiente </button>
+            </div>
+        </div>
+        {% endfor %}
+    </form>
+
+    <div id="end-test" style="display: none">
+        <input type="submit" id="submit" name="submit" value="Finalizar" class="btn btn-warning w-100"  form="disc_form" />
+    </div>
+</div>
+
+</body>
+
+<script>
+    const card_count = {{ cards.count }};
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="{% static 'DISC/script.js' %}"></script>
