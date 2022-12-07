@@ -1,0 +1,191 @@
+:root {
+  --main-orange: #ffc107;
+    --main-orange: #ffc107;
+}
+body{
+    margin: 0px;
+    background-color: gray;
+}
+
+#certificate-body{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 850px;
+    height: 1100px;
+    background-color: white;
+}
+
+#info_sup{
+    width: 100%;
+    height: 17%;
+    background-color: var(--main-orange);
+}
+
+#logo{
+    width: 20%;
+    height: 100%;
+}
+
+#personal_info{
+    width: 80%;
+    height: 100%;
+}
+
+.full_center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.full_container{
+    width: 100%;
+    height: 100%;
+}
+
+.horizontal{
+    display: flex;
+    justify-content: center;
+}
+
+.info_col{
+    width: 50%;
+    height: 80%;
+}
+
+.info_col ul{
+    list-style: none;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+}
+
+.info_col ul li{
+    background-color: white;
+    width: 95%;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+    margin-bottom: 5px;
+}
+
+#graph_cont{
+    width: 100%;
+    height: 55%;
+    position: relative;
+}
+
+#graph_cont canvas{
+    height: 70%;
+}
+
+.mid-floater{
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.pseudo-mid-floater{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.bottom-floater{
+    position: absolute;
+    bottom: -7%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.7em;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.bignum{
+    line-height: 100pt;
+    font-size: 10em;
+    font-weight: 300;
+}
+
+#puntaje{
+    height: 100%;
+    width: 100%;
+    display: table;
+
+}
+
+#puntaje p{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#pt-floater{
+    height: 50%;
+    width: 50%;
+}
+
+.vertical{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#info_inf{
+    height: 27%;
+    width: 100%;
+}
+
+#puntajes{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#puntajes table{
+    background-color: white;
+    width: 90%;
+    margin: 0 auto;
+    border-color: black;
+    font-size: 1em;
+}
+
+#puntajes table, td, th{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+td{
+    padding: 2px;
+}
+
+
+tr.highlight{
+    background-color: var(--main-orange);
+    border: white !important;
+}
+
+.middle{
+    text-align: center;
+}
+
+.bigth{
+    width: 70%;
+}
+
+.fixed{
+    position: fixed;
+    bottom: 10%;
+    right: 10%;
+}
+
+.btnDwn a{
+    text-decoration: none;
+}
+
+.fas{
+    font-size: 3rem;
+    color: var(--main-orange);
+}

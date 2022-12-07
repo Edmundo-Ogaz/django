@@ -1,0 +1,84 @@
+<html lang="es">
+
+<head>
+	<meta charset="utf-8">
+	<title>TEST</title>
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'IC/style.css' %}">
+
+	<!--<link rel="stylesheet" type="text/css" href="<?= base_url() ?>styles/css/style.css">-->
+
+</head>
+
+
+
+<body>
+<div id="time_alert">
+    Prepárate, quedan 2 minutos
+</div>
+
+<div id="content">
+    <div id="sidebar">
+        <div id="sidebar-instructions">
+            <h1><ul>
+                {{ test.name }}
+			</ul></h1>
+		<hr>
+			<ol>
+			{% for instruction in  tests.instruction_set.all %}
+                    <h4><li>
+                        {{ instruction }}
+                    </li></h4>
+                }
+            {% endfor %}
+			</ol>
+        <div id="clock">
+            <h3>Minutes: <span class="minutes"></span><br>Seconds: <span class="seconds"></span></h3>
+
+        </div>
+
+
+        <input type="submit" id="submiter" name="submiter" value="ENVIAR RESPUESTAS" class="btn btn-primary" form="myForm" onclick="action=true"/>
+        </div>
+    </div>
+    <div id="test">
+        <div id="test_cont">
+            <form action="{% url 'IC:save' test.id %}" method="post" id="myForm" >
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        {% for header in  tests.header_set.all %}
+                            <th>
+                            {{ header }}
+                            </th>
+                        {% endfor %}
+                        {% for instruction in  tests.instruction_set.all %}
+                            <th>
+                            {{ instruction.id }}
+                            </th>
+                        {% endfor %}
+                    </tr>
+                {% for row in rows %}
+                    <tr>
+                        {% for cell in row.cell_set.all %}
+                            <td>{{ cell }}</td>
+                        {% endfor %}
+                        {% for instruction in  tests.instruction_set.all %}
+                            <td>
+                            <label class="disc-container">
+                                <input type="checkbox" id="checkItem" name="check[]" value="{{forloop.counter}}-{{forloop.parentloop.counter}}">
+                                <span class="checkmark"></span>
+                            </label>
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="{% static 'IC/script.js' %}"></script>
