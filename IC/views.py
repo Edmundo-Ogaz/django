@@ -7,12 +7,18 @@ from .models import *
 from django.utils import timezone
 from django.urls import reverse
 
+import logging
+
 # Create your views here.
 
+logger = logging.getLogger(__name__)
+
 def index(request):
+    logger.debug(__name__+' index')
     return render(request, 'IC/index.html')
 
 def test(request, test_id):
+    logger.debug(__name__+' test')
     test = Test.objects.get(pk=test_id)
     headers = Test.objects.get(pk=test_id).header_set.all()
     rows = Test.objects.get(pk=test_id).row_set.all()
@@ -31,6 +37,7 @@ def test(request, test_id):
     return render(request, 'IC/test.html', context)
 
 def save(request, test_id):
+    logger.debug(__name__+' save')
     test = Test.objects.get(pk=test_id)
     user = User.objects.get(pk=1)
     # ANSWER
@@ -51,6 +58,7 @@ def save(request, test_id):
         else:
             binary_answer = "000000000000000000000000000000000000000000000000000000000000000000000000000"
             post = request.POST.getlist('check[]')
+
             for i in post:
                 preb = binary_answer[:int(i)]
                 postb = binary_answer[int(int(i) + 1):]
@@ -140,3 +148,12 @@ def certificate(request, answer_id):
         'user': answer.user
     }
     return render(request, 'IC/certificate.html', context)
+
+def list(request):
+    logger.debug(__name__+' list')
+    test = Test.objects.get(pk=1)
+
+    context = {
+        'test': test,
+    }
+    return render(request, 'IC/answer.html', context)
